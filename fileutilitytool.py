@@ -1,7 +1,12 @@
+# gui based file utility tool built using PyQt. 
+# the script only works for window os as evident from the format of the absolute path i.e C:\\...
+
+
 import os, sys, zipfile, shutil
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-class CzipWindow(QMainWindow):
+
+class CzipWindow(QMainWindow):     #displays the window for creating the zip file
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Create zip")
@@ -16,8 +21,8 @@ class CzipWindow(QMainWindow):
   self.widget = QWidget()
   self.widget.setLayout(layout)
   self.setCentralWidget(self.widget)
-  self.zipname.setText("enter zip file name with directory path")
-  self.filename.setText("enter file name to be added")
+  self.zipname.setText("enter zip file name with directory path like C:\\zip_name.zip")
+  self.filename.setText("enter file name to be added like C:\\file_name.txt")
   self.next.clicked.connect(self.crzip)
   self.next.clicked.connect(self.close)
  def crzip(self):
@@ -27,7 +32,7 @@ class CzipWindow(QMainWindow):
    nzip.write(var8, compress_type=zipfile.ZIP_DEFLATED)
    nzip.close()
    
-class EzipWindow(QMainWindow):
+class EzipWindow(QMainWindow):            # creates the window for extracting zip file
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Extract zip")
@@ -54,14 +59,7 @@ class EzipWindow(QMainWindow):
    exzip.extractall()
    exzip.close()  
   
-   
-   
-   
-   
-
- 
-   
-class DeleteWindow(QMainWindow):
+class DeleteWindow(QMainWindow):                     # creates the window for deleting file
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Delete")
@@ -81,9 +79,8 @@ class DeleteWindow(QMainWindow):
    var6=self.source.toPlainText()
    os.unlink(var6)
    
-   
-   
-class MoveWindow(QMainWindow):
+
+class MoveWindow(QMainWindow):                       # creates the window for moving file  
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Move")
@@ -108,8 +105,7 @@ class MoveWindow(QMainWindow):
   var5=self.dest.toPlainText()
   shutil.move(var4,var5)  
   
-
-class RenameWindow(QMainWindow):
+class RenameWindow(QMainWindow):                 # creates the window for renaming file
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Rename")
@@ -134,10 +130,10 @@ class RenameWindow(QMainWindow):
   var5=self.dest.toPlainText()
   shutil.move(var4,var5) 
   
-class OtherWindow(QMainWindow):
+class CreateWindow(QMainWindow):                   # creates window for creating file                       
  def __init__(self):
   QMainWindow.__init__(self)
-  self.setWindowTitle("Win2")
+  self.setWindowTitle("Create file")
   self.resize(300,150)
   layout = QVBoxLayout()
   self.text = QTextEdit()
@@ -163,7 +159,7 @@ class OtherWindow(QMainWindow):
    f.write('hello world\n')
    f.close()
 
-class CopyWindow(QMainWindow):
+class CopyWindow(QMainWindow):                    #creates the window for copying file
  def __init__(self):
   QMainWindow.__init__(self)
   self.setWindowTitle("Copy")
@@ -189,7 +185,7 @@ class CopyWindow(QMainWindow):
   shutil.copy(var2, var3) 
 
   
-class Menu(QWidget):
+class Menu(QWidget):                    # class deals with the central widget of the main window
  def __init__(self):
   super(Menu,self).__init__()
   self.options()
@@ -234,14 +230,14 @@ class Menu(QWidget):
   self.copyscreen= CopyWindow()
   self.copyscreen.show()
  def create_newWindow(self):
-   self.myOtherWindow = OtherWindow()
+   self.myOtherWindow = CreateWindow()
    self.myOtherWindow.show()
  def rename_newWindow(self):
   self.renamescreen= RenameWindow()
   self.renamescreen.show()
   
-class MainWindow(QMainWindow):
- def __init__(self):
+class MainWindow(QMainWindow):                                # class provides the main window, the central widget
+ def __init__(self):                                          #is part of menu class
   QMainWindow.__init__(self)
   exit = QAction(QIcon('icons/exit.png'), 'Exit', self)
   exit.setShortcut('Ctrl+Q')
