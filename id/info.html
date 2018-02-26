@@ -1,0 +1,32 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<form method="POST" action="/send">
+ <h3>what is your name</h3>
+ <div class="form-group">
+ 	<input type="text" name="name">
+ </div>	
+<br>
+<h3>what is your age</h3>
+<div class="form-group">
+ 	<input type="text" name="age">
+ </div>	
+<input type="file" id="fileInput"  onclick="showname()"/>
+<input type="hidden" name="imgname" id="imgname"/>
+<input class="btn btn-primary" type="submit" value="submit">
+</form>
+<script>
+ function showname () {
+      var name = document.getElementById('fileInput'); 
+      alert('Selected file: ' + name.files.item(0).name);
+      document.getElementById('imgname').value=name.files.item(0).name;
+
+      //return (name.files.item(0).name);
+    };
+
+</script>
+</body>
+</html>
